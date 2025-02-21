@@ -28,7 +28,7 @@ jobs:
         run: |
           mvn clean install
           echo "Testing"
-          cd testing;
+          cd target;
           cat module-info.java
         
   general-build-job:
