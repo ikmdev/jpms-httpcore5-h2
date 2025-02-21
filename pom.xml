@@ -39,7 +39,7 @@
     <dependencyManagement>
         <dependencies>
           <dependency>
-            <groupId>org.apache.httpcomponents.core5</groupId>
+            <groupId>dev.ikm.jpms</groupId>
             <artifactId>httpcore5</artifactId>
             <version>${httpcore5.version}</version>
          </dependency>
@@ -47,7 +47,7 @@
     </dependencyManagement>
 	<dependencies>
           <dependency>
-            <groupId>org.apache.httpcomponents.core5</groupId>
+            <groupId>dev.ikm.jpms</groupId>
             <artifactId>httpcore5</artifactId>
         </dependency>
 	</dependencies>
