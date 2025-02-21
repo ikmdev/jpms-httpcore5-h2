@@ -30,7 +30,7 @@ jobs:
           echo "Testing"
           cd target; cd classes;
           ls;
-          cat module-info.java
+          cat module-info.class
         
   general-build-job:
     name: General Build
