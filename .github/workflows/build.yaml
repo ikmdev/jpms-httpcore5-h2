@@ -21,16 +21,9 @@ jobs:
     runs-on: ubuntu-24.04
     if: github.event_name != 'pull_request'
     steps:
-      # - name: Pull Request Version Validation
-      #   uses: ikmdev/maven-pull-request-version-validation-action@v1.0.0
-      - uses: actions/checkout@v4
-      - name: Testing
-        run: |
-          mvn clean install
-          echo "Testing"
-          cd target; cd classes;
-          ls;
-          cat module-info.class
+      - name: Pull Request Version Validation
+        uses: ikmdev/maven-pull-request-version-validation-action@v1.0.0
+     
         
   general-build-job:
     name: General Build
