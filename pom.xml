@@ -1,0 +1,238 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+
+	<parent>
+		<groupId>dev.ikm.build</groupId>
+		<artifactId>parent</artifactId>
+		<version>1.57.0</version>
+		<relativePath></relativePath>
+	</parent>
+
+	<groupId>dev.ikm.jpms</groupId>
+	<artifactId>httpcore5-h2</artifactId>
+	<packaging>jar</packaging>
+	<version>5.3.3-r1</version>
+	<description>
+		Builds the httpcore5-h2. 
+	</description>
+
+	<properties>
+		<!-- change release here-->
+		<core.artifact.version>5.3.3</core.artifact.version>
+		<core.artifact.release>r1</core.artifact.release>
+        <httpcore5.version>5.3.3</httpcore5.version>
+
+		<maven.moditect.plugin>1.2.2.Final</maven.moditect.plugin>
+	</properties>
+
+	<licenses>
+		<license>
+			<name>Apache Software License 2.0</name>
+			<url>https://www.apache.org/licenses/LICENSE-2.0.txt</url>
+		</license>
+	</licenses>
+
+	<!-- transitive dependencies of the repackaged artifact -->
+    <dependencyManagement>
+        <dependencies>
+          <dependency>
+            <groupId>org.apache.httpcomponents.core5</groupId>
+            <artifactId>httpcore5</artifactId>
+            <version>${httpcore5.version}</version>
+         </dependency>
+	    </dependencies>
+    </dependencyManagement>
+	<dependencies>
+          <dependency>
+            <groupId>org.apache.httpcomponents.core5</groupId>
+            <artifactId>httpcore5</artifactId>
+        </dependency>
+	</dependencies>
+
+	<!-- Has no dependencies in this artifact -->
+	<build>
+		<resources>
+			<resource>
+				<directory>${basedir}/</directory>
+				<includes>
+					<include>LICENSE.txt</include>
+				</includes>
+			</resource>
+		</resources>
+		<pluginManagement>
+			<plugins>
+				<plugin>
+					<groupId>org.moditect</groupId>
+					<artifactId>moditect-maven-plugin</artifactId>
+					<version>${maven.moditect.plugin}</version>
+				</plugin>
+			</plugins>
+		</pluginManagement>
+
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-dependency-plugin</artifactId>
+				<executions>
+					<execution>
+						<id>sources</id>
+						<goals>
+							<goal>copy</goal>
+						</goals>
+						<phase>prepare-package</phase>
+						<configuration>
+							<artifactItems>
+								<artifactItem>
+									<groupId>org.apache.httpcomponents.core5</groupId>
+									<artifactId>httpcore5-h2</artifactId>
+									<version>${core.artifact.version}</version>
+									<classifier>sources</classifier>
+								</artifactItem>
+								<artifactItem>
+									<groupId>org.apache.httpcomponents.core5</groupId>
+									<artifactId>httpcore5-h2</artifactId>
+									<version>${core.artifact.version}</version>
+									<classifier>javadoc</classifier>
+								</artifactItem>
+							</artifactItems>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+
+			<plugin>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>build-helper-maven-plugin</artifactId>
+				<executions>
+					<execution>
+						<id>attach-artifacts</id>
+						<phase>package</phase>
+						<goals>
+							<goal>attach-artifact</goal>
+						</goals>
+						<configuration>
+							<artifacts>
+								<artifact>
+									<file>
+										${project.build.directory}/dependency/${project.artifactId}-${core.artifact.version}-sources.jar</file>
+									<type>jar</type>
+									<classifier>sources</classifier>
+								</artifact>
+								<artifact>
+									<file>
+										${project.build.directory}/dependency/${project.artifactId}-${core.artifact.version}-javadoc.jar</file>
+									<type>jar</type>
+									<classifier>javadoc</classifier>
+								</artifact>
+							</artifacts>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>			
+
+			<plugin>
+				<groupId>org.moditect</groupId>
+				<artifactId>moditect-maven-plugin</artifactId>
+				<executions>
+					<execution>
+						<id>add-module-infos</id>
+						<phase>prepare-package</phase>
+						<goals>
+							<goal>add-module-info</goal>
+						</goals>
+						<configuration>
+							<outputDirectory>${project.build.directory}/moditect</outputDirectory>
+							<overwriteExistingFiles>true</overwriteExistingFiles>
+							<modules>
+								<module>
+									<artifact>
+										<groupId>org.apache.httpcomponents.core5</groupId>
+										<artifactId>httpcore5-h2</artifactId>
+										<version>${core.artifact.version}</version>
+									</artifact>
+									<moduleInfoSource> 
+                                        open module dev.ikm.jpms.httpcore5_h2 {
+                                            requires org.conscrypt;
+                                            requires dev.ikm.jpms.httpcore5;
+
+                                            exports org.apache.hc.core5.http2;
+                                            exports org.apache.hc.core5.http2.config;
+                                            exports org.apache.hc.core5.http2.frame;
+                                            exports org.apache.hc.core5.http2.hpack;
+                                            exports org.apache.hc.core5.http2.impl;
+                                            exports org.apache.hc.core5.http2.impl.io;
+                                            exports org.apache.hc.core5.http2.impl.nio;
+                                            exports org.apache.hc.core5.http2.impl.nio.bootstrap;
+                                            exports org.apache.hc.core5.http2.nio;
+                                            exports org.apache.hc.core5.http2.nio.command;
+                                            exports org.apache.hc.core5.http2.nio.pool;
+                                            exports org.apache.hc.core5.http2.nio.support;
+                                            exports org.apache.hc.core5.http2.protocol;
+                                            exports org.apache.hc.core5.http2.ssl;
+                                        }
+                                    </moduleInfoSource>
+								</module>
+							</modules>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-antrun-plugin</artifactId>
+				<executions>
+					<execution>
+						<id>rename-sources</id>
+						<phase>package</phase>
+						<goals>
+							<goal>run</goal>
+						</goals>
+						<configuration>
+							<target>
+								<echo message="renaming sources file" />
+								<copy file="${project.build.directory}/dependency/${project.artifactId}-${core.artifact.version}-sources.jar"
+									  tofile="${project.build.directory}/${project.artifactId}-${project.version}-sources.jar" />
+							</target>
+						</configuration>
+					</execution>
+					<execution>
+						<id>rename-javadoc</id>
+						<phase>package</phase>
+						<goals>
+							<goal>run</goal>
+						</goals>
+						<configuration>
+							<target>
+								<echo message="renaming javadoc file" />
+								<copy file="${project.build.directory}/dependency/${project.artifactId}-${core.artifact.version}-javadoc.jar"
+									  tofile="${project.build.directory}/${project.artifactId}-${project.version}-javadoc.jar" />
+							</target>
+						</configuration>
+					</execution>					
+			
+					<execution>
+						<phase>prepare-package</phase>
+						<configuration>
+							<target>
+								<echo message="unzipping files" />
+								<unzip
+									src="${project.build.directory}/moditect/${project.artifactId}-${core.artifact.version}.jar"
+									dest="${project.build.directory}/classes/">
+									<patternset>
+										<exclude name="**/MANIFEST.MF" />
+									</patternset>
+								</unzip>
+							</target>
+						</configuration>
+						<goals>
+							<goal>run</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+		</plugins>
+	</build>
+</project>
