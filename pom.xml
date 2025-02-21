@@ -154,7 +154,7 @@
 										<version>${core.artifact.version}</version>
 									</artifact>
 									<moduleInfoSource> 
-                                        open module dev.ikm.jpms.httpcore5_h2 {
+                                        open module dev.ikm.jpms.httpcore5.h2 {
                                             requires org.conscrypt;
                                             requires dev.ikm.jpms.httpcore5;
 
