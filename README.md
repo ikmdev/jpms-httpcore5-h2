@@ -23,7 +23,7 @@ Add the following dependency to your pom.xml:
 
 Add the following dependency to your build.gradle:
 ```groovy
-implementation 'dev.ikm.jpms:httpcore5.h2:${latest-jpms-httpcore5-h2-version}'
+implementation 'dev.ikm.jpms:httpcore5-h2:${latest-jpms-httpcore5-h2-version}'
 ```
 
 In your module descriptor (module-info.java), declare the dependency on the jpms-httpcore5-h2 module:
