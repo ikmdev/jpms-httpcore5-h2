@@ -23,19 +23,19 @@ Add the following dependency to your pom.xml:
 
 Add the following dependency to your build.gradle:
 ```groovy
-implementation 'dev.ikm.jpms:httpcore5-h2:${latest-jpms-httpcore5-h2-version}'
+implementation 'dev.ikm.jpms:httpcore5.h2:${latest-jpms-httpcore5-h2-version}'
 ```
 
 In your module descriptor (module-info.java), declare the dependency on the jpms-httpcore5-h2 module:
 
 ```java
 module your.module.name {
-    requires dev.ikm.jpms.activej.bytebuf;
+    requires dev.ikm.jpms.httpcore5.h2
 }
 ```
 
 
 ## Issues and Contributions
-Technical and non-technical issues can be reported to the [Issue Tracker](https://github.com/ikmdev/httpcore5-h2/issues).
+Technical and non-technical issues can be reported to the [Issue Tracker](https://github.com/ikmdev/jpms-httpcore5-h2/issues).
 
 Contributions can be submitted via pull requests. Please check the [contribution guide](doc/how-to-contribute.md) for more details.
