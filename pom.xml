@@ -23,7 +23,7 @@
 	<properties>
 		<!-- change release here-->
 		<core.artifact.version>5.3.4</core.artifact.version>
-		<core.artifact.release>r5</core.artifact.release>
+		<core.artifact.release></core.artifact.release>
         <httpcore5.version>5.3.4-r4</httpcore5.version>
 
 		<maven.moditect.plugin>1.2.2.Final</maven.moditect.plugin>
