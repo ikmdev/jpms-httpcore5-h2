@@ -13,6 +13,7 @@
 
 	<groupId>dev.ikm.jpms</groupId>
 	<artifactId>httpcore5-h2</artifactId>
+    <name>Apache HttpComponents HTTP</name>
 	<packaging>jar</packaging>
 	<version>5.3.4-r5-SNAPSHOT</version>
 	<description>
@@ -23,7 +24,7 @@
 		<!-- change release here-->
 		<core.artifact.version>5.3.4</core.artifact.version>
 		<core.artifact.release>r5</core.artifact.release>
-        <httpcore5.version>5.3.4-r2</httpcore5.version>
+        <httpcore5.version>5.3.4-r4</httpcore5.version>
 
 		<maven.moditect.plugin>1.2.2.Final</maven.moditect.plugin>
 	</properties>
